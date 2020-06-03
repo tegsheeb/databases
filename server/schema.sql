@@ -8,6 +8,13 @@ CREATE TABLE messages (
 
 /* Create other tables and define schemas for them here! */
 
+-- example
+-- CREATE TABLE shop (
+--     article INT UNSIGNED  DEFAULT '0000' NOT NULL,
+--     dealer  CHAR(20)      DEFAULT ''     NOT NULL,
+--     price   DECIMAL(16,2) DEFAULT '0.00' NOT NULL,
+--     PRIMARY KEY(article, dealer));
+
 
 
 
