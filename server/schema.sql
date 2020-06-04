@@ -1,41 +1,49 @@
 -- DROP DATABASE IF EXISTS chat;
-CREATE DATABASE chat;
+CREATE DATABASE IF NOT EXISTS chat;
 
 USE chat;
 
-CREATE TABLE messages (
+CREATE TABLE IF NOT EXISTS messages (
   /* Describe your table here.*/
- id INTEGER NOT NULL AUTO_INCREMENT,
- username VARCHAR(40) NOT NULL ,
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  username INTEGER NOT NULL ,
   text_content VARCHAR(140) NOT NULL ,
-  roomname VARCHAR(40),
+  roomname INTEGER,
+  PRIMARY KEY (id),
+
+  FOREIGN KEY ( username )
+    REFERENCES users(id),
+  FOREIGN KEY ( roomname )
+    REFERENCES rooms (id)
+);
+
+CREATE TABLE users (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  username VARCHAR (40) ,
   PRIMARY KEY (id)
 );
 
+CREATE TABLE rooms (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  roomname VARCHAR (40) ,
+  PRIMARY KEY (id)
+);
 
--- CREATE TABLE users_friends (
---   user_id INTEGER,
---   friend_id INTEGER,
--- );
+CREATE TABLE friends (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  friendname VARCHAR(40) ,
+  PRIMARY KEY (id)
+);
 
--- CREATE TABLE users (
---   id INTEGER NULL AUTO_INCREMENT,
---   username VARCHAR(40) ,
---   PRIMARY KEY (id)
--- );
+CREATE TABLE users_friends (
+  users_id INTEGER,
+  friend_id INTEGER,
+  FOREIGN KEY (users_id)
+    REFERENCES users(id),
+  FOREIGN KEY (friend_id)
+    REFERENCES friends(id)
+);
 
--- CREATE TABLE rooms (
---   id INTEGER NULL AUTO_INCREMENT,
---   roomname VARCHAR(40) ,
---   PRIMARY KEY (id)
--- );
-
-
--- CREATE TABLE friends (
---   id INTEGER NULL AUTO_INCREMENT,
---   friendname VARCHAR(40) ,
---   PRIMARY KEY (id)
--- );
 
 -- ---
 -- Foreign Keys
